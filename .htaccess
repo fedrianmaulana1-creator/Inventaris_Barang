@@ -1,0 +1,14 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^api/dashboard$ api/dashboard.php [L,NC]
+RewriteRule ^api/barang-masuk$ api/barang_masuk.php [L,NC]
+RewriteRule ^api/barang-keluar$ api/barang_keluar.php [L,NC]
+RewriteRule ^api/kategori$ api/kategori.php [L,NC]
+
+
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
