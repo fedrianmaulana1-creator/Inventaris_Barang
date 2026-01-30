@@ -1,0 +1,968 @@
+{
+  "info": {
+    "_postman_id": "515a0057-d128-4c62-8c42-5ef594c2bdf7",
+    "name": "Restful API testing crud",
+    "description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51210084",
+    "_collection_link": "https://go.postman.co/collection/51210084-515a0057-d128-4c62-8c42-5ef594c2bdf7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Get dashboard",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/info?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "Post dashboard",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "namabarang",
+                  "value": "laptop asus",
+                  "type": "text",
+                  "uuid": "8ef38020-a3f4-41a2-a598-56ac02a7024e"
+                },
+                {
+                  "key": "idkategori",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "e6d979ba-9f58-4dff-90cd-7cd4dd0bfdba"
+                },
+                {
+                  "key": "deskripsi",
+                  "value": "laptop gaming",
+                  "type": "text",
+                  "uuid": "e259d26b-4bad-4850-9963-d6468be21e9f"
+                },
+                {
+                  "key": "stock",
+                  "value": "10",
+                  "type": "text",
+                  "uuid": "50c50324-7ccc-4b04-b648-0ddc891ed93c"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/dashboard",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "dashboard"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Update dashboard",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idb",
+                  "value": "35",
+                  "type": "text",
+                  "uuid": "d43875a2-9505-4ed1-83fe-c4eae645ec31"
+                },
+                {
+                  "key": "namabarang",
+                  "value": "laptop acer",
+                  "type": "text",
+                  "uuid": "6ff3a5ed-0f7b-400c-9585-401c9bdde0e6"
+                },
+                {
+                  "key": "idkategori",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "53c1ce48-b448-4fff-a705-7d94a4a008fd"
+                },
+                {
+                  "key": "deskripsi",
+                  "value": "laptop ",
+                  "type": "text",
+                  "uuid": "a75af4e0-badd-496e-9b6d-e2dc4b3f62db"
+                },
+                {
+                  "key": "stock",
+                  "value": "15",
+                  "type": "text",
+                  "uuid": "f7ae6ce9-2de4-4662-98ac-6d431eb25f44"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/dashboard",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "dashboard"
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete dashboard",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful DELETE request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idb",
+                  "value": "35",
+                  "type": "text",
+                  "uuid": "b34fa998-fd19-4a61-9dc6-19a370e3c529"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/dashboard?idb=35",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "dashboard"
+              ],
+              "query": [
+                {
+                  "key": "idb",
+                  "value": "35"
+                }
+              ]
+            },
+            "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "kategori",
+      "item": [
+        {
+          "name": "Get kategori",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Post kategori",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "namakategori",
+                  "value": "makanan",
+                  "type": "text",
+                  "uuid": "e10bde58-c4f8-4ee6-825b-dc53de40cfa7"
+                },
+                {
+                  "key": "deskripsi",
+                  "value": "ayam peyet",
+                  "type": "text",
+                  "uuid": "bc2ff63b-46f1-4549-b01a-c6bc007c7469"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/kategori",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "kategori"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Update kategori",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idkategori",
+                  "value": "47",
+                  "type": "text",
+                  "uuid": "4944eea2-b3cc-4d79-ac9e-df0600361047"
+                },
+                {
+                  "key": "namakategori",
+                  "value": "makanann",
+                  "type": "text",
+                  "uuid": "5251f58a-6382-4d37-b9be-0fb177e252db"
+                },
+                {
+                  "key": "deskripsi",
+                  "value": "ayam",
+                  "type": "text",
+                  "uuid": "82489316-3842-45de-860c-1a1ddf755ebe"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/kategori?namakategori",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "kategori"
+              ],
+              "query": [
+                {
+                  "key": "namakategori",
+                  "value": null
+                }
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete kategori",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful DELETE request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idkategori",
+                  "value": "47",
+                  "type": "text",
+                  "uuid": "ce6423fc-3008-43a2-a3fe-cc5a3b7470ee"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/kategori",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "kategori"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Kelola admin",
+      "item": [
+        {
+          "name": "Get kelola admin",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Post kelola admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/info",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "info"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Update kelola admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/info?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete kelola admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Successful DELETE request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/info?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Masuk",
+      "item": [
+        {
+          "name": "Get barang masuk",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Post barang masuk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "barangnya",
+                  "value": "grock",
+                  "type": "text",
+                  "uuid": "cbfd6a66-7c2f-4aab-bd7f-9c14fb38a5d6"
+                },
+                {
+                  "key": "qty",
+                  "value": "10",
+                  "type": "text",
+                  "uuid": "a72a78aa-c4ce-4e1f-908d-ddd22605bcd3"
+                },
+                {
+                  "key": "keterangan",
+                  "value": "ronaldo",
+                  "type": "text",
+                  "uuid": "1125df97-6ae5-406f-8a78-e856a8c9c557"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/barang_masuk",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "barang_masuk"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Update barang masuk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/info?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete barang masuk",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful DELETE request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idm",
+                  "value": "43",
+                  "type": "text",
+                  "uuid": "a3a81af6-700c-4478-bf5e-dfaa61a3a72c"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/barang_masuk",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "barang_masuk"
+              ]
+            },
+            "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "keluar",
+      "item": [
+        {
+          "name": "Get barang keluar",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Post barang keluar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idbarang",
+                  "value": "1",
+                  "type": "text",
+                  "uuid": "06be8933-0eb4-4693-9927-229b4a29056d"
+                },
+                {
+                  "key": "qty",
+                  "value": "5",
+                  "type": "text",
+                  "uuid": "386e4cbe-a993-4761-8f68-113de89a531e"
+                },
+                {
+                  "key": "penerima",
+                  "value": "asep",
+                  "type": "text",
+                  "uuid": "00e3e3ae-e142-47b7-83be-a1d42ca2ac88"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/barang_keluar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "barang_keluar"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Update barang keluar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idkeluar",
+                  "value": "22",
+                  "type": "text",
+                  "uuid": "153110d7-9e3a-4916-8125-9ac7a3d6bbe3"
+                },
+                {
+                  "key": "idbarang",
+                  "value": "6",
+                  "type": "text",
+                  "uuid": "b12c7e40-e1f8-43cb-a438-9b0fb9a38268"
+                },
+                {
+                  "key": "qty",
+                  "value": "8",
+                  "type": "text",
+                  "uuid": "ee5bfe0d-12da-408f-87af-8048576fefa8"
+                },
+                {
+                  "key": "penerima",
+                  "value": "Santos",
+                  "type": "text",
+                  "uuid": "dfdb99c9-0846-49bf-a41b-f9ddebf55d2c"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/barang_keluar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "barang_keluar"
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete barang keluar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful DELETE request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "idkeluar",
+                  "value": "22",
+                  "type": "text",
+                  "uuid": "3915db54-1ae2-43e4-afcf-0d4ad5ef2576"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost/inventaris_barang/api/barang_keluar",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "inventaris_barang",
+                "api",
+                "barang_keluar"
+              ]
+            },
+            "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "key": "base_url",
+      "value": "https://template.postman-echo.com"
+    }
+  ]
+}
